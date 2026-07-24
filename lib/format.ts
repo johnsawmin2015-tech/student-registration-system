@@ -61,3 +61,16 @@ export function formatPercent(value: number, digits = 0) {
 export function formatGpa(value: number) {
   return value.toFixed(2)
 }
+
+export function downloadCsv(filename: string, rows: Record<string, unknown>[]) {
+  if (rows.length === 0) return
+  const columns = Object.keys(rows[0])
+  const escape = (value: unknown) => `"${String(value ?? '').replaceAll('"', '""')}"`
+  const csv = [columns.map(escape).join(','), ...rows.map((row) => columns.map((column) => escape(row[column])).join(','))].join('\n')
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }))
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = filename
+  anchor.click()
+  URL.revokeObjectURL(url)
+}

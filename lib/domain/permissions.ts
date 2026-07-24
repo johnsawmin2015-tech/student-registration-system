@@ -41,8 +41,28 @@ const rolePolicy: Record<Role, Capability[]> = {
   viewer: ['view'],
 }
 
-export function can(role: Role, capability: Capability): boolean {
-  return rolePolicy[role].includes(capability)
+export type NavKey =
+  | 'dashboard' | 'students' | 'faculty' | 'departments' | 'courses'
+  | 'registrations' | 'reports' | 'notifications' | 'audit' | 'settings'
+
+const navCapability: Record<NavKey, Capability> = {
+  dashboard: 'view', students: 'view', faculty: 'view', departments: 'view',
+  courses: 'view', registrations: 'view', reports: 'view', notifications: 'view',
+  audit: 'view', settings: 'view',
+}
+
+export function can(role: Role, capability: Capability | NavKey, mode?: 'read' | 'write'): boolean {
+  if (mode === 'write') {
+    if (capability === 'registrations') return rolePolicy[role].includes('registration.manage')
+    if (capability === 'settings') return rolePolicy[role].includes('settings.manage')
+    return role !== 'viewer'
+  }
+  const resolved = capability in navCapability ? navCapability[capability as NavKey] : capability as Capability
+  return rolePolicy[role].includes(resolved)
+}
+
+export function roleLabel(role: Role) {
+  return roleLabels[role]
 }
 
 export const roleLabels: Record<Role, string> = {

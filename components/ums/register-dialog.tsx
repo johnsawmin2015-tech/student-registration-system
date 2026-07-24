@@ -28,7 +28,7 @@ export function RegisterDialog({ disabled }: { disabled?: boolean }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild><Button disabled={disabled}><PlusCircle data-icon="inline-start" />New registration</Button></DialogTrigger>
+      <DialogTrigger render={<Button disabled={disabled} />}><PlusCircle data-icon="inline-start" />New registration</DialogTrigger>
       <DialogContent>
         <DialogHeader><DialogTitle>Register student for a course</DialogTitle><DialogDescription>Enrollment is validated against capacity and duplicate checks. Full courses are waitlisted automatically.</DialogDescription></DialogHeader>
         <div className="flex flex-col gap-4 py-2">
