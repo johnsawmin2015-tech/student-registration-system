@@ -1,15 +1,37 @@
+# Dependencies
+/node_modules/
+/.pnp/
+.pnp.*
+
+# Next.js and build output
+/.next/
+/out/
+/build/
+/next-env.d.ts
+*.tsbuildinfo
+
+# Test output
+/coverage/
+/playwright-report/
+/test-results/
+/.vitest/
+
+# Local database data
+/postgres-data/
+
+# Environment variables (the documented template is committed)
+.env
+.env.*
+!.env.example
+
+# Logs and local tooling
+*.log
+.DS_Store
+/.vercel/
+/.snowflake/
+/.v0-trash/
+
 # v0 sandbox internal files
 __v0_runtime_loader.js
 __v0_devtools.tsx
 __v0_jsx-dev-runtime.ts
-.snowflake/
-.v0-trash/
-.vercel/
-
-# Environment variables
-.env*.local
-
-# Common ignores
-node_modules
-.next/
-.DS_Store

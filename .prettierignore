@@ -1,0 +1,13 @@
+.next/
+node_modules/
+out/
+build/
+coverage/
+drizzle/
+playwright-report/
+test-results/
+.vercel/
+.snowflake/
+.v0-trash/
+next-env.d.ts
+pnpm-lock.yaml
